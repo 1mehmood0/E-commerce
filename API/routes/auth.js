@@ -26,7 +26,7 @@ router.post("/register",async(req,res)=>{
 router.post("/login",async(req,res)=>{
     try{
         const userData=await User.findOne({username:req.body.username});//finding complete document of user with findONE
-       
+        console.log()
         !userData && res.status(401).send("Wrong Credentials");//username check
   
         const deHashPass=cryptoJs.AES.decrypt(userData.password,process.env.PASS_KEY);//decrypting password got from the document
@@ -46,6 +46,7 @@ router.post("/login",async(req,res)=>{
        const{password,...others}=userData._doc;//hiding password
 
        res.status(200).send({...others,accessToken});
+       
     }
     catch(e)
     {

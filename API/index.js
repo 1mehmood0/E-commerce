@@ -3,7 +3,26 @@ const app=express();
 const mongoose=require("mongoose");
 const dotenv=require("dotenv");
 const port=process.env.PORT||5000;
+const hbs=require('hbs');
+const path=require('path');
+
 dotenv.config();
+
+
+//static path
+const dirPath=path.join(__dirname,"../public");
+
+
+//views folder path
+const hbsPath=path.join(__dirname,"../tempelates/views");
+app.use(express.static(dirPath));
+
+//setting tempelate engine
+app.set('view engine','hbs');
+app.set('views',hbsPath);
+hbs.registerPartials("../tempelates/views/Partials");
+//to call css static page from public
+app.use(express.static(dirPath));
 
 const userRouter=require("./routes/user");
 const authRouter=require("./routes/auth");
@@ -12,6 +31,7 @@ const orderRouter=require("./routes/order");
 const cartRouter=require("./routes/cart");
 
 app.use(express.json());
+app.use(express.urlencoded({extended:false}));
 app.use("/api/users",userRouter);
 app.use("/api/auth",authRouter);
 app.use("/api/products",productRouter);
@@ -21,17 +41,38 @@ app.use("/api/carts",cartRouter);
 mongoose.connect(process.env.ATLAS_URL)
   .then(()=>{
     console.log("DB connection successful");
+    
   })
   .catch((e)=>{
       console.log(e);
   }); 
   
-  app.get("/api/test",(req,res)=>{
-      //console.log("check test pass");
-      res.send("hello from tester");
+ //routing
+app.get("/",(req,res)=>{
+  res.render("index");
+})
+app.get("/cart",(req,res)=>{
+  res.render("cart");
+})
+app.get("/shop",(req,res)=>{
+  res.render("shop");
+})
+app.get("/detail",(req,res)=>{
+  res.render("detail");
+})
+app.get("/login",(req,res)=>{
+  res.render("login");
+})
+app.get("/register",(req,res)=>{
+  res.render("Register");
+})
+app.get("*",(req,res)=>{
+  res.render("404",{
+      errmsg:"TF YOU SEARCHING FOR BRO?"
   });
-
+})
 
 app.listen(port,()=>{
     console.log(`Server running on port no ${port}`);
+  
 });
