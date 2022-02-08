@@ -2,25 +2,25 @@ const express=require('express');
 const app=express();
 const mongoose=require("mongoose");
 const dotenv=require("dotenv");
-const port=process.env.PORT||5000;
+const port=process.env.PORT||3000;
 const hbs=require('hbs');
 const path=require('path');
 
 dotenv.config();
 
 
-//static path
+//static files path
 const dirPath=path.join(__dirname,"../public");
 
 
 //views folder path
 const hbsPath=path.join(__dirname,"../tempelates/views");
-app.use(express.static(dirPath));
-
+hbs.registerPartials("../tempelates/views/Partials");
 //setting tempelate engine
 app.set('view engine','hbs');
 app.set('views',hbsPath);
-hbs.registerPartials("../tempelates/views/Partials");
+
+
 //to call css static page from public
 app.use(express.static(dirPath));
 
