@@ -38,7 +38,7 @@ app.use("/api/products",productRouter);
 app.use("/api/orders",orderRouter);
 app.use("/api/carts",cartRouter);
 
-mongoose.connect(process.env.ATLAS_URL)
+mongoose.connect("mongodb+srv://admin:admin@myfirst-db.7rtlu.mongodb.net/Ecommerce?retryWrites=true&w=majority")
   .then(()=>{
     console.log("DB connection successful");
     
