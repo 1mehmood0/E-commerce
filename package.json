@@ -1,7 +1,7 @@
 {
-  "name": "e-commerce-api",
-  "version": "1.0.0",
-  "description": "",
+  "name": "y",
+  "version": "3.1.0",
+  "description": "my internship web",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -17,5 +17,14 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.0",
     "stripe": "^8.202.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1pervysage0/E-commerce.git"
+  },
+  "bugs": {
+    "url": "https://github.com/1pervysage0/E-commerce/issues"
+  },
+  "homepage": "https://github.com/1pervysage0/E-commerce#readme"
 }
